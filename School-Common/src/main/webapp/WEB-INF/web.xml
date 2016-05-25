@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- webapp/WEB-INF/web.xml -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" version="3.0">
+  <display-name>To do List</display-name>
+  <welcome-file-list>
+    <welcome-file>login.do</welcome-file>
+  </welcome-file-list>
+  
+  <!-- Dispatcher Servlet is added to the web.xml -->
+  
+    <servlet>
+            <servlet-name>dispatcher</servlet-name><!--  give any name you want -->
+            <servlet-class>
+                org.springframework.web.servlet.DispatcherServlet
+            </servlet-class>
+            <init-param>
+                <param-name>contextConfigLocation</param-name>
+                <param-value>/WEB-INF/customer-servlet.xml</param-value><!--  This shows the basic spring context -->
+            </init-param>
+            <load-on-startup>1</load-on-startup>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>dispatcher</servlet-name>
+            <url-pattern>/</url-pattern><!--  Maps all url with spring-mvc it will directly be mapped here  -->
+        </servlet-mapping>
+        
+
+</web-app>

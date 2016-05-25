@@ -1,0 +1,36 @@
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0">
+
+	<persistence-unit name="com.innotrekker.api.jpa">
+		<description>
+            Hibernate using JPA
+        </description>
+
+<!-- 		<class>com.mastertheboss.domain.Order</class>
+		<class>com.mastertheboss.domain.Customer</class> -->
+		<class>com.associationtest.Student</class>
+		<class>com.onetoone.Address</class>
+		<class>com.onetomany.Phone</class>
+		<class>com.manytoone.ClassTeacher</class>
+		<class>com.manytomany.Course</class>
+		
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost:1521:XE" />
+			<property name="javax.persistence.jdbc.user" value="persistence" />
+			<property name="javax.persistence.jdbc.password" value="persistence" />
+
+			<property name="eclipselink.logging.level" value="FINE"/>
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.DerbyDialect" />
+			<!--  <property name="eclipselink.ddl-generation" value="drop-and-create-tables" /> --> 
+			 <property name="eclipselink.ddl-generation" value="create-or-extend-tables" /> 			
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

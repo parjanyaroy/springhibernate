@@ -1,0 +1,41 @@
+body {
+	background: -webkit-gradient(radial, -489 -498, 239, -423 -341, 374, from(#4A7692),
+		to(#D9DDBD))
+}
+
+@font-face {
+	font-family: sanchezfont;
+	src: url('/resources/Sanchezregular.otf');
+}
+
+#workingwindow {
+	font-family: sanchezfont;
+	background-color: white;
+	margin: 10% 20% 25% 15%;
+	border: 2px solid black;
+	border: solid 4px #126e2f;
+	-moz-border-radius: 21px;
+	-webkit-border-radius: 21px;
+	border-radius: 21px;
+	width: 60%;
+	/* height: 25%; */
+	padding: 5% 5% 5% 5%;
+	position: absolute;
+}
+
+#workingwindow table {
+	table-layout: fixed;
+	width: 100%;
+}
+
+#addNewElement {
+	border:solid 3px #9dcc7a;
+-moz-border-radius: 0px;
+-webkit-border-radius: 0px;
+border-radius: 0px;
+margin-top: 5px;
+}
+
+.alert-danger {
+	color: red;
+}

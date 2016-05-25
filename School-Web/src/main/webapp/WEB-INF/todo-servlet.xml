@@ -1,0 +1,84 @@
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+
+	<context:component-scan base-package="com.*" />
+
+
+	<!-- In Spring MVC, BeanNameUrlHandlerMapping is the default handler mapping 
+		mechanism, which maps URL requests to the name of the beans -->
+	<bean id="HandlerMapping"
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping" />
+
+	<bean id="/testHandlerMapping" class="com.CustomMappingTestController" />
+	<!-- *********************************************************** -->
+
+	<!-- In Spring MVC, InternalResourceViewResolver is used to resolve “internal 
+		resource view” (in simple, it’s final output, jsp or htmp page) based on 
+		a predefined URL pattern. In additional, it allow you to add some predefined 
+		prefix or suffix to the view name (prefix + view name + suffix), and generate 
+		the final view page URL. -->
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix">
+			<value>/WEB-INF/views/</value><!-- This is added as prefix to all what 
+				we send -->
+		</property>
+		<property name="suffix">
+			<value>.jsp</value> <!-- Added because all are JSPs . So returning name is only required -->
+		</property>
+	</bean>
+	<!-- *********************************************************** -->
+
+	<!-- Tag should be added to your Web Application context XML. This tag defaults 
+		the basic components required for delegating the requests to your Controllers. 
+		If this tag is not added to the XML, then you will have to manually define 
+		the beans for components like HandlerAdapter, HandlerMapping, Binding Initializer, 
+		Request Message converters, etc -->
+	<mvc:annotation-driven />
+	<!-- *********************************************************** -->
+
+	<!-- This would invoke the interceptor for every request on the page -->
+	<!-- <mvc:interceptors> <bean class="com.DayOfWeekBasedAccessInterceptor"/> 
+		</mvc:interceptors> -->
+
+
+
+	<mvc:interceptors>
+		<!-- The following fragment will run the interceptor for every /register 
+			request .Now the interceptor will be invoked for specific url -->
+		<mvc:interceptor>
+			<mvc:mapping path="/register" />
+			<bean class="com.DayOfWeekBasedAccessInterceptor" />
+		</mvc:interceptor>
+
+
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="siteLanguage" />
+		</bean>
+	</mvc:interceptors>
+
+	<!-- *********************************************************** -->
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="/WEB-INF/customerMessages" />
+	</bean>
+
+	<!-- *********************************************************** -->
+
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.CookieLocaleResolver" />
+	<!-- its mandatory to put the above line while working with LocaleChangeInterceptor -->
+
+	<!-- *********************************************************** -->
+	<!-- Links to the css file kept in the resources folder under webapps -->
+	 <mvc:resources mapping="/resources/**" location="/resources/"/>
+
+</beans>
+    
+    
